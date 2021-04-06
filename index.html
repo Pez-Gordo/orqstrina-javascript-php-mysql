@@ -14,33 +14,43 @@
 	
 	<!-- === Tuned By PeZ === -->
     <button type="button" id="admin" class="btn btn-secondary">Admin</button>
+    <button type="button" id="cancelAdmin" class="btn btn-secondary">Back</button>
+    <button type="button" id="logout" class="btn btn-secondary">Logout</button>
+    <button type="button" id="reset" class="btn btn-danger">reset</button>
+ 
+
 
 	<audio id="player" ontimeupdate="updateProgress()">
 		<source  id="source">	
 		Audio no soportado	
 	</audio>
 	
-	<div id="controls">
+	<div id="controls" class="controls">
 
 		<div class="timer" id="timer">
 			&nbsp;
 		</div>
 
-		<div class="volumen" id="vol">
-			Vol: 
-			<i class="fas fa-volume-down"></i> 
-			<input type="range" name="volumen" id="volumen" min="0" max="1" step="0.01" value="0.75"> 
-			<i class="fas fa-volume-up"></i>
-		</div>
+        <div id="audioControls">
+		    <div class="volumen" id="vol">
+		    	Vol: 
+		    	<i class="fas fa-volume-down"></i> 
+		    	<input type="range" name="volumen" id="volumen" min="0" max="1" step="0.01" value="0.75"> 
+		    	<i class="fas fa-volume-up"></i>
+		    </div>
 		
-		<!--<i class="fas fa-backward fa-5x" onclick="prevSong();"></i>-->
-		<i class="far fa-play-circle fa-5x" onclick="togglePlay()" id="iconPlay"></i> 
-		<i class="fas fa-forward fa-5x" onclick="nextSong()" id="iconForward"></i>
+        
+            <!--<i class="fas fa-backward fa-5x" onclick="prevSong();"></i>-->
+            <i class="far fa-play-circle fa-5x" onclick="togglePlay()" id="iconPlay"></i> 
+            <i class="fas fa-forward fa-5x" onclick="nextSong()" id="iconForward"></i>
+            <progress id="progress" value="0" max="100" ></progress>
+        </div>
+            
 		<br>
 
 		<span id="currentPlay"></span><br>
 		<canvas id="canvas1"></canvas>
-		<progress id="progress" value="0" max="100" ></progress>
+		
 				
 		<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 			<input type="radio" class="btn-check" name="btnradio" id="btnradio1" onclick="toggleModal('collection')" autocomplete="off" checked>
@@ -57,6 +67,13 @@
 		<div id="playlist"><ol id="cola"></ol></div>
 		<div id="upload"><button>Upoad</button></div>
 	</div>
+
+    <!-- Modal Admin Login -->
+    <div class="controls" id="loginModal"> 
+        <input type="text" id="pass">
+        <input type="submit" id="login">
+    </div>
+
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="./libs/js/orqstrina.js"></script>
 </body>

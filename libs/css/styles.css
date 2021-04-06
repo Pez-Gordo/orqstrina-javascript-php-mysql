@@ -11,7 +11,7 @@ body{
 	min-height: 50vh;
 }
 
-#collection{
+#collection, #playlist{
 	background: black;
 	border-radius: 10px;
 	text-align: left;
@@ -45,8 +45,9 @@ li.active{
 	color: red;
 }
 
-#controls{
-	border: 5px #eee solid;
+
+.controls {
+    border: 5px #eee solid;
 	border-radius: 10px;
 	padding: 10px;
 	background: black;
