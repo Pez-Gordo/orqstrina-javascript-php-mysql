@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>orQstrina</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<link href="./libs/css/styles.css" rel="stylesheet">
+	<link href="fontawesome/css/all.css" rel="stylesheet">
+	<script defer src="fontawesome/js/all.js"></script> 
+	<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+	<!-- Original reproductor from Obed Alvarado -> https://obedalvarado.pw/blog/crea-un-reproductor-de-musica-con-javascript-html5-y-css/ -->
+	
+	<!-- === Tuned By PeZ === -->
+    <button type="button" id="admin" class="btn btn-secondary">Admin</button>
+
+	<audio id="player" ontimeupdate="updateProgress()">
+		<source  id="source">	
+		Audio no soportado	
+	</audio>
+	
+	<div id="controls">
+
+		<div class="timer" id="timer">
+			&nbsp;
+		</div>
+
+		<div class="volumen" id="vol">
+			Vol: 
+			<i class="fas fa-volume-down"></i> 
+			<input type="range" name="volumen" id="volumen" min="0" max="1" step="0.01" value="0.75"> 
+			<i class="fas fa-volume-up"></i>
+		</div>
+		
+		<!--<i class="fas fa-backward fa-5x" onclick="prevSong();"></i>-->
+		<i class="far fa-play-circle fa-5x" onclick="togglePlay()" id="iconPlay"></i> 
+		<i class="fas fa-forward fa-5x" onclick="nextSong()" id="iconForward"></i>
+		<br>
+
+		<span id="currentPlay"></span><br>
+		<canvas id="canvas1"></canvas>
+		<progress id="progress" value="0" max="100" ></progress>
+				
+		<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+			<input type="radio" class="btn-check" name="btnradio" id="btnradio1" onclick="toggleModal('collection')" autocomplete="off" checked>
+			<label class="btn btn-danger" for="btnradio1">Collection</label>
+		  
+			<input type="radio" class="btn-check" name="btnradio" id="btnradio2" onclick="toggleModal('playlist')" autocomplete="off">
+			<label class="btn btn-warning" for="btnradio2">Playlist</label>
+		  
+			<input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="toggleModal('upload')" autocomplete="off">
+			<label class="btn btn-success" for="btnradio3">Upload</label>
+		  </div>
+
+		<div id="collection"><ol id="listadoMusica"></ol></div>
+		<div id="playlist"><ol id="cola"></ol></div>
+		<div id="upload"><button>Upoad</button></div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="./libs/js/orqstrina.js"></script>
+</body>
+</html>

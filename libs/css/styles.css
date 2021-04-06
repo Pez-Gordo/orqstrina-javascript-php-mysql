@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+body{
+	background: linear-gradient(to right, red, yellow, green);
+	font-family: 'Lato', sans-serif;
+	font-size: 1.3em;
+	width: 50%;
+	margin: 15px auto;
+	padding: 20px;
+	text-align: center;
+	min-height: 50vh;
+}
+
+#collection{
+	background: black;
+	border-radius: 10px;
+	text-align: left;
+	color: #49d312;
+}
+
+#queue {
+	background: black;
+	border-radius: 10px;
+	text-align: left;
+	color: #49d312;
+}
+
+#upload {
+	background: black;
+	border-radius: 10px;
+	text-align: left;
+	color: #49d312;
+}
+
+li{
+	padding: 10px;
+}
+
+li:hover, svg:hover {
+	cursor: pointer;
+	color: yellow;
+}
+
+li.active{
+	color: red;
+}
+
+#controls{
+	border: 5px #eee solid;
+	border-radius: 10px;
+	padding: 10px;
+	background: black;
+	opacity: 1;
+}
+
+svg{
+	color: red;
+}
+
+progress{
+	width: 80%;
+	margin: 10px;
+	/*opacity: 0.5;*/
+
+}
+
+.timer{
+	width:50%;
+	position: relative;
+	top:10px;
+	left:0px;
+	text-align:left;
+	float:left;
+	font-weight: bold;
+	color: white;
+}
+
+.volumen{
+	width:50%;
+	position: relative;
+	top:10px;
+	right:0px;
+	text-align:right;
+	float:left;
+	color: red;
+	margin-bottom:20px;
+}
+
+#currentPlay{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	color: yellow;
+	font-weight: bold;
+}
+
+#canvas1 {
+	border-top: 0px;
+	border-right: 3px solid darkgrey;
+	border-bottom: 3px solid darkgrey;
+	border-left: 3px solid darkgrey;
+	margin-top: 35px;
+    width: 80%;
+    height: 75px;
+    /*filter: blur(5px) contrast(20);*/
+}
