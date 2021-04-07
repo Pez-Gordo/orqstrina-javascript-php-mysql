@@ -58,7 +58,8 @@ resetButton.hide()
 populateSongsArray()
 createCollection()
 
-if(source.src === "http://localhost/orqstrina-javascript-php-mysql/") playerLoad()
+if(source.src === "http://localhost/orqstrina-javascript-php-mysql/" ||
+   source.src === "http://localhost/orqstrina-javascript-php-mysql/index.html") playerLoad()
 
 console.log(source.src)
 
@@ -222,7 +223,7 @@ function loadNextSong(song) {
     source.src = "audio/" + song
 }
 
-// usar el puñetero nombre
+// Funcion para la carga dinamica del reproductor
 
 function playerLoad() {
     // ajax para saber si hay pistas en la playlist. Si hay empieza a tocarlas todas por orden. Si no llama a la funcion playRandom

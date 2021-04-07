@@ -67,11 +67,13 @@
 		<div id="collection"><ol id="listadoMusica"></ol></div>
 		<div id="playlist"><button id="refresh">Refresh</button><ol id="cola"></ol></div>
 		<div id="upload">
-            <form action="upload.php" method="post" enctype="multipart/form-data">
-            Select song to upload:
-            <input type="file" name="fileToUpload" id="fileToUpload">
-            <input type="submit" value="Upload Song" name="submit">
-          </form>
+			<!-- Upload files form -->
+			<form action="./libs/php/upload_file.php" method="post" enctype="multipart/form-data">
+				<input type="file" name="audio">
+				<br><br>
+				<button>Subir archivo</button>
+			</form>
+
         </div>
 	</div>
 
