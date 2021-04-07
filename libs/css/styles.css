@@ -96,11 +96,15 @@ progress{
 
 #canvas1 {
 	border-top: 0px;
-	border-right: 3px solid darkgrey;
+	/*border-right: 3px solid darkgrey;
 	border-bottom: 3px solid darkgrey;
-	border-left: 3px solid darkgrey;
+	border-left: 3px solid darkgrey;*/
 	margin-top: 35px;
     width: 80%;
     height: 75px;
     /*filter: blur(5px) contrast(20);*/
+}
+
+#buttonPlay, #buttonForward {
+    background: transparent;
 }

@@ -21,7 +21,7 @@
 
 
 	<audio id="player" ontimeupdate="updateProgress()">
-		<source  id="source">	
+		<source id="source">	
 		Audio no soportado	
 	</audio>
 	
@@ -41,12 +41,13 @@
 		
         
             <!--<i class="fas fa-backward fa-5x" onclick="prevSong();"></i>-->
-            <i class="far fa-play-circle fa-5x" onclick="togglePlay()" id="iconPlay"></i> 
-            <i class="fas fa-forward fa-5x" onclick="nextSong()" id="iconForward"></i>
+
+            <button id="buttonPlay"><i class="far fa-play-circle fa-5x" onclick="togglePlay()" id="iconPlay"></i></button>
+            <button id="buttonForward"><i class="fas fa-forward fa-5x" onclick="nextSong()" id="iconForward"></i></button>
             <progress id="progress" value="0" max="100" ></progress>
         </div>
             
-		<br>
+		
 
 		<span id="currentPlay"></span><br>
 		<canvas id="canvas1"></canvas>
@@ -61,11 +62,17 @@
 		  
 			<input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="toggleModal('upload')" autocomplete="off">
 			<label class="btn btn-success" for="btnradio3">Upload</label>
-		  </div>
+		</div>
 
 		<div id="collection"><ol id="listadoMusica"></ol></div>
-		<div id="playlist"><ol id="cola"></ol></div>
-		<div id="upload"><button>Upoad</button></div>
+		<div id="playlist"><button id="refresh">Refresh</button><ol id="cola"></ol></div>
+		<div id="upload">
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+            Select song to upload:
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input type="submit" value="Upload Song" name="submit">
+          </form>
+        </div>
 	</div>
 
     <!-- Modal Admin Login -->
