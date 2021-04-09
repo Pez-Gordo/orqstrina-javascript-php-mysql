@@ -14,6 +14,7 @@ source.src = ''
 var player = document.getElementById('player')
 
 var buttonPlay = $('#buttonPlay')
+var buttonForward = $('#buttonForward')
 
 var radio1 = document.getElementById('btnradio1')
 var radio2 = document.getElementById('btnradio2')
@@ -219,8 +220,12 @@ const updateProgress = () => {
 	} 
 }
 
-function loadNextSong(song) {
-    source.src = "audio/" + song
+function nextSong() {
+    //source.src = "audio/" + song
+    player.pause()
+    player.currentTime = 0
+    playerLoad() 
+    player.play()
 }
 
 // Funcion para la carga dinamica del reproductor
@@ -350,7 +355,7 @@ function oscillate() {
 	audioSource.connect(analyzer)
 	analyzer.connect(audioContext.destination)
 	analyzer.fftSize = 512
-	const bufferLength = analyzer.frequencyBinCount*0.42
+	const bufferLength = analyzer.frequencyBinCount * 0.42
 	const dataArray = new Uint8Array(bufferLength)
 
 	const barWidth = canvas.width / bufferLength
@@ -388,14 +393,19 @@ function drawVisualizer(bufferLength, x, barWidth, barHeight, dataArray) {
 
 
 // Event listeners for buttons
-/*
+
 buttonPlay.on('click', function() { 
-    console.log("Play clicked")
-    source.src = "./audio/keygen_pista_22.mp3"
-    player.load()
-    player.currentTime = 0
-    player.play()
-})*/
+    //console.log("Play clicked")
+    //source.src = "./audio/keygen_pista_22.mp3"
+    //player.load()
+    //player.currentTime = 0
+    //player.play()
+    togglePlay()
+})
+
+buttonForward.on('click', function() {
+    nextSong()
+})
 
 
 
