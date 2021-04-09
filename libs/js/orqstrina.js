@@ -42,7 +42,7 @@ var listadoCola = document.getElementById('cola')
 
 // Modals initial configuration
 
-//audioControls.hide()
+audioControls.hide()
 
 collectionModal.show()
 playlistModal.hide()
@@ -197,6 +197,13 @@ function createPlaylist() {
     console.log("listado cola-->", listadoCola)
 	collection.appendChild(listado)
     console.log(collection)
+}
+
+//Funcion para control del volumen
+const volumen = document.getElementById("volumen")
+volumen.oninput= (e) =>{
+	const vol = e.target.value
+	player.volume = vol
 }
 
 //Funcion para actualizar la barra de progreso del reprodutor
