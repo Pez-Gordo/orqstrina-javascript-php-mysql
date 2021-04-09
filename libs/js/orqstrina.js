@@ -8,6 +8,7 @@ const canvas = document.getElementById('canvas1')
 const ctx = canvas.getContext('2d')
 let audioSource
 let analyzer
+let previousTitle
 
 var source = document.getElementById('source')
 source.src = ''
@@ -252,7 +253,7 @@ function playerLoad() {
                 source.src = "./audio/" + response[0][0]
                 player.load()
                 reproduccionActual("Playing: " + response[0][0])
-
+                previousTitle = response[0][0]
                 // borramos registro de la base de datos con un ajax --> nueva rutina delete__current_song.php
                 $.ajax({
                     async: false,
@@ -269,9 +270,13 @@ function playerLoad() {
             } else {
                 // cargamos reproductor con una cancion al azar de la coleccion
                 var randomIndex = Math.floor(Math.random() * songsArray.length)
+                while (songsArray[randomIndex][0] == previousTitle) {
+                    var randomIndex = Math.floor(Math.random() * songsArray.length)
+                }
                 source.src = "./audio/" + songsArray[randomIndex][0]
                 player.load()
                 reproduccionActual("Playing: " + songsArray[randomIndex][0])
+                previousTitle = songsArray[randomIndex][0]
             }
         }
     })
