@@ -119,19 +119,23 @@ function createCollection() {
 		item.setAttribute("id", songsArray.indexOf(songsArray[i]))
 		listado.appendChild(item)
 	}
-    console.log("listadp---_>", listado)
+    console.log("listadp--->", listado)
 	collection.appendChild(listado)
     console.log(collection)
+}
+
+// Funcion para refrescar la lista de reproduccion
+function refreshList() {
+    listadoCola.innerHTML = ''
+    populatePlaylistArray()
+    createPlaylist()
 }
 
 // Evento para refrescar la lista de reproduccion
 refreshButton.on('click', function() {
     // ajax to query queue_list table and refresh list
-    listadoCola.innerHTML = ''
-    populatePlaylistArray()
-    createPlaylist()
+    refreshList()
 })
-
 
 // Evento para añadir cancion a la cola al hacer click en la lista coleccion
 listado.addEventListener("click", addSongToQueue)
@@ -139,7 +143,6 @@ listado.addEventListener("click", addSongToQueue)
 // Funcion añade cancion a la tabla queuelist
 function addSongToQueue(e) {
 	const itemClick = e.target
-
     songTitle = itemClick.innerText
 
     // Ajax call to add song to queuelist in database
@@ -167,7 +170,6 @@ function addSongToQueue(e) {
     listadoCola.innerHTML = ''
     populatePlaylistArray()
     createPlaylist()
-	
 }
 
 // Function to populate array containing queued songs in the playlist
@@ -182,22 +184,27 @@ function populatePlaylistArray() {
                 playlistArray = response
             } else if (response == "0") {
                 console.log("No queued songs. Playing random")
+                playlistArray.pop()
             }
         }
     })
 }
 
-function createPlaylist() {
-    
-    for (let i = 0; i < playlistArray.length; i++){
-		const item = document.createElement('li')
-		item.appendChild(document.createTextNode(playlistArray[i][0])) 
-		item.setAttribute("id", playlistArray.indexOf(playlistArray[i]))
-		listadoCola.appendChild(item)
-	}
+function createPlaylist() { 
+    console.log("playlistarray--------->", playlistArray)
+    if (playlistArray.length > 0) {
+        for (let i = 0; i < playlistArray.length; i++) {
+            const item = document.createElement('li')
+		    item.appendChild(document.createTextNode(playlistArray[i][0])) 
+		    item.setAttribute("id", playlistArray.indexOf(playlistArray[i]))
+		    listadoCola.appendChild(item)
+	    }
     console.log("listado cola-->", listadoCola)
-	collection.appendChild(listado)
+	//collection.appendChild(listado)
     console.log(collection)
+    } else {
+        listadoCola.innerHTML = ''
+    }
 }
 
 //Funcion para control del volumen
@@ -213,23 +220,23 @@ const updateProgress = () => {
 		const barra = document.getElementById('progress')
 		barra.value = (player.currentTime / player.duration) * 100
 		
-		var duracionSegundos= player.duration.toFixed(0);
-		dura=secondsToString(duracionSegundos);
+		var duracionSegundos = player.duration.toFixed(0)
+		dura = secondsToString(duracionSegundos)
 		var actualSegundos = player.currentTime.toFixed(0)
-		actual=secondsToString(actualSegundos);
+		actual = secondsToString(actualSegundos)
 		
-		duracion= actual +' / '+ dura
-		document.getElementById('timer').innerText=duracion 
+		duracion = actual + ' / ' + dura
+		document.getElementById('timer').innerText = duracion 
 	}
 	if (player.ended) {
-
+        
 		playerLoad()
         player.play()
+        refreshList()
 	} 
 }
 
 function nextSong() {
-    //source.src = "audio/" + song
     player.pause()
     player.currentTime = 0
     playerLoad() 
@@ -239,7 +246,7 @@ function nextSong() {
 // Funcion para la carga dinamica del reproductor
 
 function playerLoad() {
-    // ajax para saber si hay pistas en la playlist. Si hay empieza a tocarlas todas por orden. Si no llama a la funcion playRandom
+    // ajax para saber si hay pistas en la playlist. Si hay, empieza a tocar la primera cancion de la lista y la borra, y así hasta que no haya más canciones. Si no hay canciones en la playlist, carga una cancion al azar
     
     $.ajax({
         async: false,
@@ -270,6 +277,7 @@ function playerLoad() {
             } else {
                 // cargamos reproductor con una cancion al azar de la coleccion
                 var randomIndex = Math.floor(Math.random() * songsArray.length)
+                // comprobamos que la nueva cancion aleatoria no sea la misma que la última que sonó
                 while (songsArray[randomIndex][0] == previousTitle) {
                     var randomIndex = Math.floor(Math.random() * songsArray.length)
                 }
@@ -311,7 +319,6 @@ function resetOrqstrina() {
 function togglePlay() {
 	if (player.paused){
 		toggleIcon()
-        
 		return player.play()
 	} else {
 		toggleIcon()
@@ -339,8 +346,8 @@ function secondsToString(seconds) {
 	var hour="";
 	if (seconds>3600){
 		hour = Math.floor(seconds / 3600);
-		hour = (hour < 10)? '0' + hour : hour;
-		hour+=":"
+		hour = (hour < 10) ? '0' + hour : hour;
+		hour += ":"
 	}
    var minute = Math.floor((seconds / 60) % 60);
   minute = (minute < 10)? '0' + minute : minute;
@@ -351,16 +358,14 @@ function secondsToString(seconds) {
 
 //Funcion para mostrar el nombre del arhivo actual en reproduccion
 function reproduccionActual(texto){
-	document.getElementById('currentPlay').innerText=texto
+	document.getElementById('currentPlay').innerText = texto
 }
 
 
 // Implementando el visualizador de sonido
 player.addEventListener('playing', oscillate)
 
-function oscillate() {
-	//const audio1 = document.getElementById('player')
-	
+function oscillate() {	
 	const audioContext = new AudioContext()
 	audioSource = audioContext.createMediaElementSource(player)
 	analyzer = audioContext.createAnalyser()
@@ -377,11 +382,8 @@ function oscillate() {
 		x = 0
 		ctx.clearRect(0, 0, canvas.width, canvas.height)
 		analyzer.getByteFrequencyData(dataArray)
-
 		drawVisualizer(bufferLength, x, barWidth, barHeight, dataArray) 
-
 		requestAnimationFrame(animate)
-
 	}
 	animate()
 }
@@ -401,25 +403,15 @@ function drawVisualizer(bufferLength, x, barWidth, barHeight, dataArray) {
 }
 
 
-
-
-
 // Event listeners for buttons
 
 buttonPlay.on('click', function() { 
-    //console.log("Play clicked")
-    //source.src = "./audio/keygen_pista_22.mp3"
-    //player.load()
-    //player.currentTime = 0
-    //player.play()
     togglePlay()
 })
 
 buttonForward.on('click', function() {
     nextSong()
 })
-
-
 
 
 // Event listeners for admin login

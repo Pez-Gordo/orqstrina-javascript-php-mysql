@@ -108,3 +108,7 @@ progress{
 #buttonPlay, #buttonForward {
     background: transparent;
 }
+
+#claveLabel {
+	color: yellow;
+}

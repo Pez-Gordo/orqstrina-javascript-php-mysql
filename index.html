@@ -71,7 +71,8 @@
 			<form action="./libs/php/upload_file.php" method="post" enctype="multipart/form-data">
 				<input type="file" name="audio">
 				<br><br>
-				<button>Subir archivo</button>
+				<!--<button type="button" disabled>Upload File</button>-->
+				<button>Upload File</button>
 			</form>
 
         </div>
@@ -79,7 +80,8 @@
 
     <!-- Modal Admin Login -->
     <div class="controls" id="loginModal"> 
-        <input type="text" id="pass">
+		<label for="clave" id="claveLabel">Enter admin password: </label>
+        <input type="text" id="pass" value="orQstrina" name="clave">
         <input type="submit" id="login">
     </div>
 

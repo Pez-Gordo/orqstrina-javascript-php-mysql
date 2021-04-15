@@ -9,20 +9,20 @@ error_reporting(E_ALL);
 $nombre = $_FILES['audio']['name'];
 $guardado = $_FILES['audio']['tmp_name'];
 
-if(!file_exists('audio')) {
-    mkdir('audio', 0777, true);
-    if(file_exists('audio')) {
-        if(move_uploaded_file($guardado, 'audio/'.$nombre)) {
-            echo "Archivo guardado con exito";
+if(!file_exists('../../audio')) {
+    mkdir('../../audio', 0777, true);
+    if(file_exists('../../audio')) {
+        if(move_uploaded_file($guardado, '../../audio/'.$nombre)) {
+            echo "File uploaded";
         } else {
-            echo "Archivo no se pudo guardar";
+            echo "Upload failed";
         }
     }
 } else {
-    if(move_uploaded_file($guardado, 'audio/'.$nombre)) {
-        echo "Archivo guardado con exito";
+    if(move_uploaded_file($guardado, '../../audio/'.$nombre)) {
+        echo "File uploaded";
     } else {
-        echo "Archivo no se puso guardar";
+        echo "Upload failed";
     }
 }
 ?>
@@ -30,5 +30,5 @@ if(!file_exists('audio')) {
     <form action="../../index.html" method="post" enctype="multipart/form-data">
         
         <br><br>
-        <button>Volver a orQestrina</button>
+        <button>Back</button>
     </form>
